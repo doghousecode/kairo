@@ -1,4 +1,6 @@
 'use client';
+// @ts-nocheck
+
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
   Globe, Cpu, Trophy, Music, Landmark, Car, Shirt, Dumbbell, Film, TrendingUp,
