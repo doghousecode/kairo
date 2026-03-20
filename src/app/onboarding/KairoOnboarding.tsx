@@ -127,9 +127,9 @@ const DRIFT_SPEED = 0.0006;
 const DRIFT_AMP = 3;
 const LONG_PRESS_MS = 500;
 
-function getR(sel, pri, expanded) { if (expanded) return EXPANDED_R; return sel ? BASE_R + (SEL_ADD[pri] || 0) : BASE_R; }
-function getSubR(priority) { if (priority === 1) return SUB_R_BOOSTED; if (priority === 0) return SUB_R_SELECTED; return SUB_R_BASE; }
-function clampV(v) { return Math.max(-MAX_VEL, Math.min(MAX_VEL, v)); }
+function getR(sel: boolean, pri: number, expanded: boolean) { function getR(sel, pri, expanded) { if (expanded) return EXPANDED_R; return sel ? BASE_R + (SEL_ADD[pri] || 0) : BASE_R; }
+function getSubR(priority: number) { function getSubR(priority) { if (priority === 1) return SUB_R_BOOSTED; if (priority === 0) return SUB_R_SELECTED; return SUB_R_BASE; }
+function clampV(v: number) { return Math.max(-MAX_VEL, Math.min(MAX_VEL, v)); }
 
 function KairoLogo({ size = "md" }) {
   const s = { sm: "text-xl", md: "text-2xl", lg: "text-5xl" }[size];
