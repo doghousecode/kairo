@@ -44,6 +44,20 @@ export default function Home() {
           {briefing}
         </div>
       )}
+<a href="/onboarding" style={{
+  display: "inline-block",
+  padding: "14px 36px",
+  background: "linear-gradient(135deg, #4F8EF7 0%, #6366F1 100%)",
+  color: "#fff",
+  borderRadius: 16,
+  fontWeight: 600,
+  textDecoration: "none",
+  fontSize: 14,
+  marginTop: 16,
+  boxShadow: "0 4px 24px rgba(79,142,247,0.3)",
+}}>
+  Start Onboarding
+</a>
     </main>
   );
 }
