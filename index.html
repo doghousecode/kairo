@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairo — Your AI Chief of Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --border: rgba(255,255,255,0.07);
+    --text-primary: #f0f0f0;
+    --text-secondary: rgba(240,240,240,0.4);
+    --text-tertiary: rgba(240,240,240,0.2);
+    --blue-dim: #2a3a6a;
+    --blue-bright: #5b80e8;
+    --blue-cta: #5a7de8;
+    --blue-cta-hover: #6b8ef5;
+  }
+
+  /* Logo colour rules — K and RO are dim, AI is bright */
+  .l-dim  { color: var(--blue-dim); }
+  .l-ai   { color: var(--blue-bright); }
+  .l-ro   { color: var(--blue-dim); }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  header {
+    padding: 3rem 0 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.05s;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .header-meta {
+    font-size: 0.6rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hero {
+    padding: 6rem 0 4.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-logo {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .hero-desc {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    line-height: 1.8;
+    max-width: 380px;
+  }
+
+  .divider { width: 100%; height: 0.5px; background: var(--border); }
+
+  .products-section {
+    padding: 3.5rem 0 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .product-card {
+    background: var(--bg);
+    padding: 1.75rem 1.5rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    transition: background 0.25s ease;
+  }
+
+  .product-card:hover { background: var(--surface); }
+
+  .product-card.coming-soon {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .card-number {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--text-tertiary);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
+    line-height: 1;
+  }
+
+  .card-desc {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .card-footer {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-status {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .status-live { color: #5be878; }
+  .status-dev  { color: var(--blue-cta); }
+  .status-soon { color: var(--text-tertiary); }
+
+  .card-arrow {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    transition: color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .product-card:hover .card-arrow {
+    color: var(--blue-bright);
+    transform: translate(3px, -3px);
+  }
+
+  .cta-section {
+    padding: 0 0 5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.55s;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-cta);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover {
+    background: var(--blue-cta-hover);
+    transform: translateY(-1px);
+  }
+
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 1.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.65s;
+  }
+
+  .footer-logo { font-size: 0.85rem; font-weight: 900; letter-spacing: 0.04em; }
+  .footer-right { font-size: 0.6rem; color: var(--text-tertiary); letter-spacing: 0.1em; font-weight: 500; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 720px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-logo { font-size: 4.5rem; }
+    .header-meta { display: none; }
+  }
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>
+      </div>
+      <span class="header-meta">meetkairo.ai</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-logo">
+      <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>
+    </div>
+    <p class="hero-sub">Your AI chief of staff.</p>
+    <p class="hero-desc">A personal suite of intelligent tools — built around one person, one workflow, and one relentless standard.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="products-section">
+    <div class="section-label">The suite</div>
+    <div class="products-grid">
+
+      <a href="https://kairo-murex.vercel.app" class="product-card">
+        <div class="card-number">01</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">SIGNAL</span>
+        </div>
+        <div class="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
+        <div class="card-footer">
+          <span class="card-status status-live">Live</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/doghousecode/kairo-spaghetti" class="product-card">
+        <div class="card-number">02</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">SPAGHETTI</span>
+        </div>
+        <div class="card-desc">Ideas that decay if you ignore them. Capture before the wall gets cold.</div>
+        <div class="card-footer">
+          <span class="card-status status-dev">In development</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/doghousecode/kairo-decode" class="product-card">
+        <div class="card-number">03</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">DECODE</span>
+        </div>
+        <div class="card-desc">An evolving AI glossary. Look up any term, get a live explanation.</div>
+        <div class="card-footer">
+          <span class="card-status status-dev">In development</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/doghousecode/kairo-playbook" class="product-card">
+        <div class="card-number">04</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">PLAYBOOK</span>
+        </div>
+        <div class="card-desc">How to build AI tools — from idea to deployed. A living guide from real projects.</div>
+        <div class="card-footer">
+          <span class="card-status status-dev">In development</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <div class="product-card coming-soon">
+        <div class="card-number">05</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">COACH</span>
+        </div>
+        <div class="card-desc">Build real AI skills from scratch. Methodical, consistent, designed to compound.</div>
+        <div class="card-footer">
+          <span class="card-status status-soon">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="product-card coming-soon">
+        <div class="card-number">06</div>
+        <div class="card-name">
+          <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>&nbsp;<span class="l-ai">BITES</span>
+        </div>
+        <div class="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
+        <div class="card-footer">
+          <span class="card-status status-soon">Coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<footer>
+    <div class="footer-logo">
+      <span class="l-dim">K</span><span class="l-ai">AI</span><span class="l-ro">RO</span>
+    </div>
+    <span class="footer-right">© 2026 — Personal use</span>
+  </footer>
+
+</div>
+</body>
+</html>
