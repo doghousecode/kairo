@@ -244,9 +244,9 @@ export default function Home() {
             <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
               <div className="card-number">04</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI</span>
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
               </div>
-              <div className="card-desc">Ideas that decay if you ignore them. Capture before the wall gets cold.</div>
+              <div className="card-desc">Throw ideas at the wall...see what sticks.</div>
               <div className="card-footer">
                 <span className="card-status status-dev">In development</span>
                 <span className="card-arrow">↗</span>
