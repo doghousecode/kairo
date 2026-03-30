@@ -1,63 +1,290 @@
-"use client";
-import { useState } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kairo — Your AI Chief of Staff",
+  description: "A personal suite of intelligent tools — built around one person, one workflow, and one relentless standard.",
+};
+
+const css = `
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --border: rgba(255,255,255,0.07);
+    --text-primary: #f0f0f0;
+    --text-secondary: rgba(240,240,240,0.4);
+    --text-tertiary: rgba(240,240,240,0.2);
+    --blue-dim: #2a3a6a;
+    --blue-bright: #5b80e8;
+    --blue-cta: #5a7de8;
+    --blue-cta-hover: #6b8ef5;
+  }
+
+  .l-dim  { color: var(--blue-dim); }
+  .l-ai   { color: var(--blue-bright); }
+  .l-ro   { color: var(--blue-dim); }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrapper { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  header { padding: 3rem 0 0; opacity: 0; animation: fadeUp 0.8s ease forwards 0.05s; }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 0.04em; line-height: 1; }
+
+  .header-meta {
+    font-size: 0.6rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hero { padding: 6rem 0 4.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+
+  .hero-logo {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-sub { font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 1rem; }
+
+  .hero-desc { font-size: 0.78rem; color: var(--text-tertiary); line-height: 1.8; max-width: 380px; }
+
+  .divider { width: 100%; height: 0.5px; background: var(--border); }
+
+  .products-section { padding: 3.5rem 0 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .product-card {
+    background: var(--bg);
+    padding: 1.75rem 1.5rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    transition: background 0.25s ease;
+  }
+
+  .product-card:hover { background: var(--surface); }
+
+  .product-card.coming-soon { opacity: 0.35; pointer-events: none; }
+
+  .card-number { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--text-tertiary); margin-bottom: 1.25rem; font-weight: 500; }
+
+  .card-name { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.6rem; line-height: 1; }
+
+  .card-desc { font-size: 0.7rem; color: var(--text-secondary); line-height: 1.7; flex: 1; }
+
+  .card-footer { margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+
+  .card-status { font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+  .status-live { color: #5be878; }
+  .status-dev  { color: var(--blue-cta); }
+  .status-soon { color: var(--text-tertiary); }
+
+  .card-arrow { font-size: 0.8rem; color: var(--text-tertiary); transition: color 0.2s, transform 0.2s; display: inline-block; }
+
+  .product-card:hover .card-arrow { color: var(--blue-bright); transform: translate(3px, -3px); }
+
+  .cta-section { padding: 0 0 5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s; }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-cta);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover { background: var(--blue-cta-hover); transform: translateY(-1px); }
+
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 1.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.65s;
+  }
+
+  .footer-logo { font-size: 0.85rem; font-weight: 900; letter-spacing: 0.04em; }
+  .footer-right { font-size: 0.6rem; color: var(--text-tertiary); letter-spacing: 0.1em; font-weight: 500; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 720px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-logo { font-size: 4.5rem; }
+    .header-meta { display: none; }
+  }
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
+  }
+`;
 
 export default function Home() {
-  const [briefing, setBriefing] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const generateBriefing = async () => {
-    setLoading(true);
-    const res = await fetch("/api/briefing", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        interests: "AI, Arsenal, Apple, fashion, automotive",
-      }),
-    });
-    const data = await res.json();
-    setBriefing(data.briefing);
-    setLoading(false);
-  };
-
   return (
-    <main style={{ maxWidth: 680, margin: "0 auto", padding: "48px 24px", fontFamily: "system-ui" }}>
-      <h1 style={{ fontSize: 32, fontWeight: 800, letterSpacing: "-0.03em" }}>
-        <span style={{ color: "#1A2B4A" }}>K</span>
-        <span style={{ color: "#4A7AFF" }}>AI</span>
-        <span style={{ color: "#1A2B4A" }}>RO</span>
-      </h1>
-      <p style={{ color: "#666", marginBottom: 32 }}>Your morning briefing.</p>
-      <button
-        onClick={generateBriefing}
-        disabled={loading}
-        style={{
-          background: "#3A6EE8", color: "white", border: "none",
-          padding: "12px 28px", borderRadius: 8, fontSize: 15,
-          fontWeight: 700, cursor: loading ? "not-allowed" : "pointer",
-          opacity: loading ? 0.7 : 1
-        }}
-      >
-        {loading ? "Generating..." : "Generate Briefing"}
-      </button>
-      {briefing && (
-        <div style={{ marginTop: 40, whiteSpace: "pre-wrap", lineHeight: 1.7, fontSize: 15 }}>
-          {briefing}
-        </div>
-      )}
-<a href="/onboarding" style={{
-  display: "inline-block",
-  padding: "14px 36px",
-  background: "linear-gradient(135deg, #4F8EF7 0%, #6366F1 100%)",
-  color: "#fff",
-  borderRadius: 16,
-  fontWeight: 600,
-  textDecoration: "none",
-  fontSize: 14,
-  marginTop: 16,
-  boxShadow: "0 4px 24px rgba(79,142,247,0.3)",
-}}>
-  Start Onboarding
-</a>
-    </main>
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+
+      <div className="wrapper">
+        <header>
+          <div className="header-inner">
+            <div className="logo">
+              <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
+            </div>
+            <span className="header-meta">meetkairo.ai</span>
+          </div>
+        </header>
+
+        <section className="hero">
+          <div className="hero-logo">
+            <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
+          </div>
+          <p className="hero-sub">Your AI chief of staff.</p>
+          <p className="hero-desc">A personal suite of intelligent tools — built around one person, one workflow, and one relentless standard.</p>
+        </section>
+
+        <div className="divider"></div>
+
+        <section className="products-section">
+          <div className="section-label">The suite</div>
+          <div className="products-grid">
+
+            <a href="https://signal.meetkairo.ai/" className="product-card">
+              <div className="card-number">01</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SIGNAL</span>
+              </div>
+              <div className="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
+              <div className="card-footer">
+                <span className="card-status status-live">Live</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
+              <div className="card-number">02</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI</span>
+              </div>
+              <div className="card-desc">Ideas that decay if you ignore them. Capture before the wall gets cold.</div>
+              <div className="card-footer">
+                <span className="card-status status-dev">In development</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://decode.meetkairo.ai/" className="product-card">
+              <div className="card-number">03</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">DECODE</span>
+              </div>
+              <div className="card-desc">An evolving AI glossary. Look up any term, get a live explanation.</div>
+              <div className="card-footer">
+                <span className="card-status status-dev">In development</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/doghousecode/kairo-playbook" className="product-card">
+              <div className="card-number">04</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">PLAYBOOK</span>
+              </div>
+              <div className="card-desc">How to build AI tools — from idea to deployed. A living guide from real projects.</div>
+              <div className="card-footer">
+                <span className="card-status status-dev">In development</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <div className="product-card coming-soon">
+              <div className="card-number">05</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">COACH</span>
+              </div>
+              <div className="card-desc">Build real AI skills from scratch. Methodical, consistent, designed to compound.</div>
+              <div className="card-footer">
+                <span className="card-status status-soon">Coming soon</span>
+              </div>
+            </div>
+
+            <div className="product-card coming-soon">
+              <div className="card-number">06</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
+              </div>
+              <div className="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
+              <div className="card-footer">
+                <span className="card-status status-soon">Coming soon</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <footer>
+          <div className="footer-logo">
+            <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
+          </div>
+          <span className="footer-right">© 2026 — Personal use</span>
+        </footer>
+      </div>
+    </>
   );
 }
