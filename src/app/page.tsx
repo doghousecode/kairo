@@ -205,20 +205,44 @@ export default function Home() {
           <div className="section-label">The suite</div>
           <div className="products-grid">
 
-            <a href="https://signal.meetkairo.ai/" className="product-card">
+            <a href="https://decode.meetkairo.ai/" className="product-card">
               <div className="card-number">01</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SIGNAL</span>
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">DECODE</span>
               </div>
-              <div className="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
+              <div className="card-desc">An evolving AI glossary. Look up any term, get a live explanation.</div>
               <div className="card-footer">
                 <span className="card-status status-live">Live</span>
                 <span className="card-arrow">↗</span>
               </div>
             </a>
 
-            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
+            <a href="https://bites.meetkairo.ai/" className="product-card">
               <div className="card-number">02</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
+              </div>
+              <div className="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
+              <div className="card-footer">
+                <span className="card-status status-live">Live</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://signal.meetkairo.ai/" className="product-card">
+              <div className="card-number">03</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SIGNAL</span>
+              </div>
+              <div className="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
+              <div className="card-footer">
+                <span className="card-status status-dev">In development</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
+              <div className="card-number">04</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI</span>
               </div>
@@ -229,20 +253,8 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="https://decode.meetkairo.ai/" className="product-card">
-              <div className="card-number">03</div>
-              <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">DECODE</span>
-              </div>
-              <div className="card-desc">An evolving AI glossary. Look up any term, get a live explanation.</div>
-              <div className="card-footer">
-                <span className="card-status status-dev">In development</span>
-                <span className="card-arrow">↗</span>
-              </div>
-            </a>
-
             <a href="https://github.com/doghousecode/kairo-playbook" className="product-card">
-              <div className="card-number">04</div>
+              <div className="card-number">05</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">PLAYBOOK</span>
               </div>
@@ -254,7 +266,7 @@ export default function Home() {
             </a>
 
             <div className="product-card coming-soon">
-              <div className="card-number">05</div>
+              <div className="card-number">06</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">COACH</span>
               </div>
@@ -263,18 +275,6 @@ export default function Home() {
                 <span className="card-status status-soon">Coming soon</span>
               </div>
             </div>
-
-            <a href="https://bites.meetkairo.ai/" className="product-card">
-              <div className="card-number">06</div>
-              <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
-              </div>
-              <div className="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
-              <div className="card-footer">
-                <span className="card-status status-live">Live</span>
-                <span className="card-arrow">↗</span>
-              </div>
-            </a>
 
           </div>
         </section>
