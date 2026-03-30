@@ -253,17 +253,16 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="https://github.com/doghousecode/kairo-playbook" className="product-card">
+            <div className="product-card coming-soon">
               <div className="card-number">05</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">PLAYBOOK</span>
               </div>
               <div className="card-desc">How to build AI tools — from idea to deployed. A living guide from real projects.</div>
               <div className="card-footer">
-                <span className="card-status status-dev">In development</span>
-                <span className="card-arrow">↗</span>
+                <span className="card-status status-soon">Coming soon</span>
               </div>
-            </a>
+            </div>
 
             <div className="product-card coming-soon">
               <div className="card-number">06</div>
