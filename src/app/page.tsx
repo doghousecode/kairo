@@ -264,16 +264,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="product-card coming-soon">
+            <a href="https://bites.meetkairo.ai/" className="product-card">
               <div className="card-number">06</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
               </div>
               <div className="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
               <div className="card-footer">
-                <span className="card-status status-soon">Coming soon</span>
+                <span className="card-status status-live">Live</span>
+                <span className="card-arrow">↗</span>
               </div>
-            </div>
+            </a>
 
           </div>
         </section>
