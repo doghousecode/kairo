@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
 };
 
-const SPLASH_DURATION = 4.8; // seconds total
-const PAGE_REVEAL_START = 4.2; // seconds — slightly before splash fully gone
+const SPLASH_DURATION = 4.8;   // seconds — hold then fade out
+const PAGE_REVEAL    = 0.6;    // seconds — page fade-in duration
 
 export default function RootLayout({
   children,
@@ -41,29 +41,22 @@ export default function RootLayout({
             80%  { opacity: 1; }
             100% { opacity: 0; }
           }
-          @keyframes pageRevealAnim {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-          }
           #kairo-splash {
             position: fixed;
             inset: 0;
             z-index: 9999;
             background: #0d0d0d;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             pointer-events: none;
             animation: kairoSplashAnim ${SPLASH_DURATION}s ease forwards;
           }
-          #kairo-root {
-            animation: pageRevealAnim 0.6s ease ${PAGE_REVEAL_START}s both;
-          }
         `}} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Splash — server-rendered so it's in the first paint, zero flicker */}
+
+        {/* Splash — server-rendered, first paint, covers everything below */}
         <div id="kairo-splash">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -73,15 +66,22 @@ export default function RootLayout({
           />
         </div>
 
-        <div id="kairo-root">
+        {/* opacity:0 inline so it's hidden before any CSS or JS parses */}
+        <div id="kairo-root" style={{ opacity: 0 }}>
           {children}
         </div>
 
         <script dangerouslySetInnerHTML={{ __html: `
-          if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
-          document.getElementById('kairo-splash').addEventListener('animationend', function() {
-            this.remove();
-          });
+          (function() {
+            var splash = document.getElementById('kairo-splash');
+            var root   = document.getElementById('kairo-root');
+            if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+            splash.addEventListener('animationend', function() {
+              splash.remove();
+              root.style.transition = 'opacity ${PAGE_REVEAL}s ease';
+              root.style.opacity    = '1';
+            });
+          })();
         `}} />
       </body>
     </html>
