@@ -32,6 +32,12 @@ export default function RootLayout({
     <html lang="en" style={{ background: '#0d0d0d' }}>
       <head>
         <meta name="theme-color" content="#0d0d0d" />
+        {/* Synchronous blocking script — runs before CSS, before body, before first paint.
+            Sets background dark on the document root immediately so WKWebView (iOS PWA)
+            never shows its default white background. */}
+        <script dangerouslySetInnerHTML={{ __html:
+          `document.documentElement.style.background='#0d0d0d';document.documentElement.style.overflow='hidden';`
+        }} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ background: '#0d0d0d' }}>
 
@@ -60,6 +66,7 @@ export default function RootLayout({
             var splash = document.getElementById('kairo-splash');
             var root   = document.getElementById('kairo-root');
             setTimeout(function() {
+              document.documentElement.style.overflow = '';
               root.style.transition   = 'opacity 0.6s ease';
               root.style.opacity      = '1';
               splash.style.transition = 'opacity 0.8s ease';
