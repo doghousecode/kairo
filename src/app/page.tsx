@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SplashScreen from "./components/SplashScreen";
 
 export const metadata: Metadata = {
   title: "Kairo — Your AI Chief of Staff",
@@ -173,6 +174,7 @@ const css = `
 export default function Home() {
   return (
     <>
+      <SplashScreen />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Jost:ital,wght@1,800&display=swap" rel="stylesheet" />
       <style dangerouslySetInnerHTML={{ __html: css }} />

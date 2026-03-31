@@ -1,0 +1,17 @@
+{
+  "name": "Kairo",
+  "short_name": "Kairo",
+  "description": "Your AI chief of staff.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "1800x1800",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
