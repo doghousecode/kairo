@@ -8,15 +8,3 @@
 html, body {
   background: #0d0d0d;
 }
-
-/* Splash — in the compiled CSS bundle so it's applied before first paint */
-#kairo-splash {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #0d0d0d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}

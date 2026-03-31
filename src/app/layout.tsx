@@ -35,8 +35,13 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ background: '#0d0d0d' }}>
 
-        {/* Splash overlay — styled via globals.css so it's in the CSS bundle */}
-        <div id="kairo-splash">
+        {/* All styles inline — no dependency on CSS load order */}
+        <div id="kairo-splash" style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: '#0d0d0d', display: 'flex',
+          alignItems: 'center', justifyContent: 'center',
+          pointerEvents: 'none',
+        }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/kairo-wordmark-cropped.png"
