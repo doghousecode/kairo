@@ -2,7 +2,6 @@ const CACHE = 'kairo-v1';
 
 const PRECACHE = [
   '/',
-  '/icon.png',
   '/kairo-wordmark-cropped.png',
 ];
 

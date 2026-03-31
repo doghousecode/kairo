@@ -55,7 +55,6 @@ export default function RootLayout({
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2.5vw;
             pointer-events: none;
             animation: kairoSplashAnim ${SPLASH_DURATION}s ease forwards;
           }
@@ -69,15 +68,9 @@ export default function RootLayout({
         <div id="kairo-splash">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/icon.png"
-            alt=""
-            style={{ width: '52vw', maxWidth: '500px', height: 'auto' }}
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
             src="/kairo-wordmark-cropped.png"
             alt="Kairo"
-            style={{ width: '36vw', maxWidth: '360px', height: 'auto' }}
+            style={{ width: '68vw', maxWidth: '680px', height: 'auto' }}
           />
         </div>
 
