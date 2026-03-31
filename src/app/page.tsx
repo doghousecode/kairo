@@ -58,23 +58,7 @@ const css = `
     font-weight: 500;
   }
 
-  .hero { padding: 6rem 0 4.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-
-  .hero-logo {
-    font-size: clamp(4rem, 12vw, 8rem);
-    font-weight: 900;
-    letter-spacing: 0.03em;
-    line-height: 1;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-sub { font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 1rem; }
-
-  .hero-desc { font-size: 0.78rem; color: var(--text-tertiary); line-height: 1.8; max-width: 380px; }
-
-  .divider { width: 100%; height: 0.5px; background: var(--border); }
-
-  .products-section { padding: 3.5rem 0 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .products-section { padding: 3rem 0 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
 
   .section-label {
     font-size: 0.6rem;
@@ -191,22 +175,24 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="hero">
-          <div className="hero-logo">
-            <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
-          </div>
-          <p className="hero-sub">Your AI chief of staff.</p>
-          <p className="hero-desc">A personal suite of intelligent tools — built around one person, one workflow, and one relentless standard.</p>
-        </section>
-
-        <div className="divider"></div>
-
         <section className="products-section">
           <div className="section-label">The suite</div>
           <div className="products-grid">
 
-            <a href="https://decode.meetkairo.ai/" className="product-card">
+            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
               <div className="card-number">01</div>
+              <div className="card-name">
+                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
+              </div>
+              <div className="card-desc">Throw ideas at the wall...see what sticks.</div>
+              <div className="card-footer">
+                <span className="card-status status-live">Live</span>
+                <span className="card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="https://decode.meetkairo.ai/" className="product-card">
+              <div className="card-number">02</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">DECODE</span>
               </div>
@@ -218,7 +204,7 @@ export default function Home() {
             </a>
 
             <a href="https://bites.meetkairo.ai/" className="product-card">
-              <div className="card-number">02</div>
+              <div className="card-number">03</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
               </div>
@@ -230,23 +216,11 @@ export default function Home() {
             </a>
 
             <a href="https://signal.meetkairo.ai/" className="product-card">
-              <div className="card-number">03</div>
+              <div className="card-number">04</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SIGNAL</span>
               </div>
               <div className="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
-              <div className="card-footer">
-                <span className="card-status status-dev">In development</span>
-                <span className="card-arrow">↗</span>
-              </div>
-            </a>
-
-            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
-              <div className="card-number">04</div>
-              <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
-              </div>
-              <div className="card-desc">Throw ideas at the wall...see what sticks.</div>
               <div className="card-footer">
                 <span className="card-status status-dev">In development</span>
                 <span className="card-arrow">↗</span>
