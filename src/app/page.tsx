@@ -104,16 +104,16 @@ const css = `
 
   .product-card.coming-soon { opacity: 0.35; pointer-events: none; }
 
-  .card-number { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--text-tertiary); margin-bottom: 1.25rem; font-weight: 500; }
+  .card-number { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-tertiary); margin-bottom: 1.25rem; font-weight: 500; }
 
-  .card-name { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.6rem; line-height: 1; }
+  .card-name { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.6rem; line-height: 1; }
   .wordmark { font-family: 'Jost', sans-serif; font-weight: 800; font-style: oblique; }
 
-  .card-desc { font-size: 0.7rem; color: var(--text-secondary); line-height: 1.7; flex: 1; }
+  .card-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; flex: 1; }
 
   .card-footer { margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
 
-  .card-status { font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .card-status { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
 
   .status-live { color: #5be878; }
   .status-dev  { color: var(--blue-cta); }
