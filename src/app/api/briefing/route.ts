@@ -9,9 +9,6 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const SUPPORTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 5MB — Anthropic API limit
-
 const SYSTEM_PROMPT = `You are Steve's personal morning briefing assistant. Deliver a 10-15 minute read covering the sections below. Always include source links and end with 3-5 specific follow-up prompts.
 
 DEDUPLICATION: Do not repeat stories already covered in recent briefings unless there's a meaningful update.
@@ -79,7 +76,7 @@ Only if genuinely major news is dominating the cycle.
 - Film: Oscars/BAFTAs level only
 - Viral moments, award show highlights
 
-### 🌍 Politics — "Don't Let Me Stupid"
+### 🌍 Politics — "Don't Let Me Look Stupid"
 - UK: Government headlines, policy changes affecting real life
 - US: Trump admin moves (especially tech/AI/Apple-relevant)
 - International: only the biggest stories
@@ -93,107 +90,32 @@ Only if genuinely major news is dominating the cycle.
 ### 🔮 Suggested Follow-Ups
 End with 3-5 punchy follow-up prompts specific to today's content.`;
 
-function validateImage(
-  base64Data: string,
-  mediaType: string
-): { valid: boolean; reason?: string } {
-  if (!SUPPORTED_IMAGE_TYPES.includes(mediaType)) {
-    return {
-      valid: false,
-      reason: `Unsupported image type '${mediaType}'. Supported: ${SUPPORTED_IMAGE_TYPES.join(", ")}`,
-    };
-  }
-
-  // base64 string length → approximate byte size
-  const approxBytes = Math.ceil((base64Data.length * 3) / 4);
-  if (approxBytes > MAX_IMAGE_BYTES) {
-    return {
-      valid: false,
-      reason: `Image too large (${Math.round(approxBytes / 1024)}KB). Maximum is ${MAX_IMAGE_BYTES / 1024 / 1024}MB.`,
-    };
-  }
-
-  return { valid: true };
-}
-
-async function generateBriefing(
-  withImage?: { data: string; mediaType: string }
-): Promise<string> {
-  const userContent: Anthropic.MessageParam["content"] = [];
-
-  if (withImage) {
-    userContent.push({
-      type: "image",
-      source: {
-        type: "base64",
-        media_type: withImage.mediaType as
-          | "image/jpeg"
-          | "image/png"
-          | "image/gif"
-          | "image/webp",
-        data: withImage.data,
-      },
-    });
-  }
-
-  userContent.push({ type: "text", text: "morning briefing" });
+export async function POST(request: Request) {
+  const { interests } = await request.json();
 
   const message = await client.messages.create({
     model: "claude-opus-4-5",
     max_tokens: 4096,
     system: SYSTEM_PROMPT,
-    messages: [{ role: "user", content: userContent }],
+    messages: [
+      {
+        role: "user",
+        content: "morning briefing",
+      },
+    ],
   });
 
-  return message.content[0].type === "text" ? message.content[0].text : "";
-}
+  const text =
+    message.content[0].type === "text" ? message.content[0].text : "";
 
-export async function POST(request: Request) {
-  const { interests, image, imageMediaType } = await request.json();
-
-  let text = "";
-  let imageWarning: string | undefined;
-
-  if (image) {
-    const validation = validateImage(image, imageMediaType ?? "image/png");
-
-    if (!validation.valid) {
-      return NextResponse.json(
-        { error: `Invalid image: ${validation.reason}` },
-        { status: 400 }
-      );
-    }
-
-    try {
-      text = await generateBriefing({ data: image, mediaType: imageMediaType ?? "image/png" });
-    } catch (err: unknown) {
-      const apiError = err as { status?: number; error?: { error?: { message?: string } } };
-      const isImageError =
-        apiError?.status === 400 &&
-        apiError?.error?.error?.message?.toLowerCase().includes("could not process image");
-
-      if (isImageError) {
-        // The image was rejected by the API — fall back to text-only briefing
-        // so the conversation is not left in a broken state.
-        imageWarning =
-          "The image could not be processed and was skipped. Briefing generated without it.";
-        text = await generateBriefing();
-      } else {
-        throw err;
-      }
-    }
-  } else {
-    text = await generateBriefing();
-  }
-
-  const { error: dbError } = await supabase.from("briefings").insert({
+  const { error } = await supabase.from("briefings").insert({
     content: text,
     topics_covered: interests
       ? interests.split(",").map((i: string) => i.trim())
       : [],
   });
 
-  if (dbError) console.log("Supabase error:", dbError);
+  if (error) console.log("Supabase error:", error);
 
-  return NextResponse.json({ briefing: text, ...(imageWarning ? { warning: imageWarning } : {}) });
+  return NextResponse.json({ briefing: text });
 }
