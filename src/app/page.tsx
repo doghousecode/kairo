@@ -59,7 +59,7 @@ const css = `
 
   .page-body { padding-top: 4.5rem; }
 
-  .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 0.04em; line-height: 1; }
+  .logo img { height: 32px; width: auto; display: block; }
 
   .header-meta {
     font-size: 0.6rem;
@@ -180,7 +180,7 @@ export default function Home() {
         <header>
           <div className="header-inner">
             <div className="logo">
-              <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
+              <img src="/kairo-wordmark-cropped.png" alt="Kairo" />
             </div>
             <span className="header-meta">meetkairo.ai</span>
           </div>
