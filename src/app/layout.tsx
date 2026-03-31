@@ -37,9 +37,8 @@ export default function RootLayout({
         <meta name="theme-color" content="#0d0d0d" />
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes kairoSplashAnim {
-            0%   { opacity: 0; }
-            12%  { opacity: 1; }
-            75%  { opacity: 1; }
+            0%   { opacity: 1; }
+            80%  { opacity: 1; }
             100% { opacity: 0; }
           }
           @keyframes pageRevealAnim {
