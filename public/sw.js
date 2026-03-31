@@ -1,7 +1,6 @@
-const CACHE = 'kairo-v1';
+const CACHE = 'kairo-v2';
 
 const PRECACHE = [
-  '/',
   '/kairo-wordmark-cropped.png',
 ];
 
@@ -20,20 +19,31 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Only handle same-origin GET requests
   if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) return;
 
-  e.respondWith(
-    caches.match(e.request).then((cached) => {
-      const network = fetch(e.request).then((res) => {
-        if (res.ok) {
+  const isNavigation = e.request.mode === 'navigate';
+
+  if (isNavigation) {
+    // Network-first for HTML pages so deploys always get through
+    e.respondWith(
+      fetch(e.request)
+        .then((res) => {
           const clone = res.clone();
           caches.open(CACHE).then((c) => c.put(e.request, clone));
-        }
-        return res;
-      });
-      // Serve cache immediately; fall back to network; fall back to cache if offline
-      return cached || network.catch(() => cached);
-    })
-  );
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+  } else {
+    // Cache-first for static assets (images, fonts, js, css)
+    e.respondWith(
+      caches.match(e.request).then((cached) => {
+        const network = fetch(e.request).then((res) => {
+          if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone()));
+          return res;
+        });
+        return cached || network;
+      })
+    );
+  }
 });
