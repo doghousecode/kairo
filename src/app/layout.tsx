@@ -83,7 +83,7 @@ export default function RootLayout({
               splash.style.transition = 'opacity 0.8s ease';
               splash.style.opacity    = '0';
               setTimeout(function() { splash.remove(); }, 800);
-            }, 4000);
+            }, 3000);
           })();
         `}} />
       </body>
