@@ -23,9 +23,6 @@ export const metadata: Metadata = {
   },
 };
 
-const SPLASH_DURATION = 4.8;   // seconds — hold then fade out
-const PAGE_REVEAL    = 0.6;    // seconds — page fade-in duration
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,28 +32,10 @@ export default function RootLayout({
     <html lang="en" style={{ background: '#0d0d0d' }}>
       <head>
         <meta name="theme-color" content="#0d0d0d" />
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes kairoSplashAnim {
-            0%   { opacity: 1; }
-            80%  { opacity: 1; }
-            100% { opacity: 0; }
-          }
-          #kairo-splash {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #0d0d0d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            animation: kairoSplashAnim ${SPLASH_DURATION}s ease forwards;
-          }
-        `}} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ background: '#0d0d0d' }}>
 
-        {/* Splash — server-rendered, first paint, covers everything below */}
+        {/* Splash overlay — styled via globals.css so it's in the CSS bundle */}
         <div id="kairo-splash">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -66,21 +45,22 @@ export default function RootLayout({
           />
         </div>
 
-        {/* opacity:0 inline so it's hidden before any CSS or JS parses */}
         <div id="kairo-root" style={{ opacity: 0 }}>
           {children}
         </div>
 
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
+            if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
             var splash = document.getElementById('kairo-splash');
             var root   = document.getElementById('kairo-root');
-            if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
-            splash.addEventListener('animationend', function() {
-              splash.remove();
-              root.style.transition = 'opacity ${PAGE_REVEAL}s ease';
-              root.style.opacity    = '1';
-            });
+            setTimeout(function() {
+              root.style.transition   = 'opacity 0.6s ease';
+              root.style.opacity      = '1';
+              splash.style.transition = 'opacity 0.8s ease';
+              splash.style.opacity    = '0';
+              setTimeout(function() { splash.remove(); }, 800);
+            }, 4000);
           })();
         `}} />
       </body>
