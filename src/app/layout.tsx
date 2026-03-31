@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ background: '#0d0d0d' }}>
       <head>
         <meta name="theme-color" content="#0d0d0d" />
         <style dangerouslySetInnerHTML={{ __html: `
@@ -54,7 +54,7 @@ export default function RootLayout({
           }
         `}} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ background: '#0d0d0d' }}>
 
         {/* Splash — server-rendered, first paint, covers everything below */}
         <div id="kairo-splash">
