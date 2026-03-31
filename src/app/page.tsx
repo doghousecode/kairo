@@ -38,15 +38,26 @@ const css = `
 
   .wrapper { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
 
-  header { padding: 3rem 0 0; opacity: 0; animation: fadeUp 0.8s ease forwards 0.05s; }
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--bg);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.05s;
+  }
 
   .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 2rem;
     border-bottom: 0.5px solid var(--border);
   }
+
+  .page-body { padding-top: 4.5rem; }
 
   .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 0.04em; line-height: 1; }
 
@@ -175,11 +186,12 @@ export default function Home() {
           </div>
         </header>
 
+        <div className="page-body">
         <section className="products-section">
           <div className="section-label">The suite</div>
           <div className="products-grid">
 
-            <a href="https://github.com/doghousecode/kairo-spaghetti" className="product-card">
+            <a href="https://spaghetti.meetkairo.ai/" className="product-card">
               <div className="card-number">01</div>
               <div className="card-name">
                 <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
@@ -258,6 +270,7 @@ export default function Home() {
           </div>
           <span className="footer-right">© 2026 — Personal use</span>
         </footer>
+        </div>
       </div>
     </>
   );
