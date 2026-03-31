@@ -107,6 +107,7 @@ const css = `
   .card-number { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--text-tertiary); margin-bottom: 1.25rem; font-weight: 500; }
 
   .card-name { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.6rem; line-height: 1; }
+  .wordmark { font-family: 'Jost', sans-serif; font-weight: 800; font-style: oblique; }
 
   .card-desc { font-size: 0.7rem; color: var(--text-secondary); line-height: 1.7; flex: 1; }
 
@@ -173,7 +174,7 @@ export default function Home() {
   return (
     <>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Jost:ital,wght@1,800&display=swap" rel="stylesheet" />
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <div className="wrapper">
@@ -194,7 +195,7 @@ export default function Home() {
             <a href="https://spaghetti.meetkairo.ai/" className="product-card">
               <div className="card-number">01</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">SPAGHETTI WALL</span>
               </div>
               <div className="card-desc">Throw ideas at the wall...see what sticks.</div>
               <div className="card-footer">
@@ -206,7 +207,7 @@ export default function Home() {
             <a href="https://decode.meetkairo.ai/" className="product-card">
               <div className="card-number">02</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">DECODE</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">DECODE</span>
               </div>
               <div className="card-desc">An evolving AI glossary. Look up any term, get a live explanation.</div>
               <div className="card-footer">
@@ -218,7 +219,7 @@ export default function Home() {
             <a href="https://bites.meetkairo.ai/" className="product-card">
               <div className="card-number">03</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">BITES</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">BITES</span>
               </div>
               <div className="card-desc">One concept. One prompt. Five minutes. A daily ritual for staying sharp.</div>
               <div className="card-footer">
@@ -230,7 +231,7 @@ export default function Home() {
             <a href="https://signal.meetkairo.ai/" className="product-card">
               <div className="card-number">04</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">SIGNAL</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">SIGNAL</span>
               </div>
               <div className="card-desc">Daily morning briefing. News, sport, culture — filtered through your world.</div>
               <div className="card-footer">
@@ -242,7 +243,7 @@ export default function Home() {
             <div className="product-card coming-soon">
               <div className="card-number">05</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">PLAYBOOK</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">PLAYBOOK</span>
               </div>
               <div className="card-desc">How to build AI tools — from idea to deployed. A living guide from real projects.</div>
               <div className="card-footer">
@@ -253,7 +254,7 @@ export default function Home() {
             <div className="product-card coming-soon">
               <div className="card-number">06</div>
               <div className="card-name">
-                <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>&nbsp;<span className="l-ai">COACH</span>
+                <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>&nbsp;<span className="l-ai">COACH</span>
               </div>
               <div className="card-desc">Build real AI skills from scratch. Methodical, consistent, designed to compound.</div>
               <div className="card-footer">
@@ -266,7 +267,7 @@ export default function Home() {
 
         <footer>
           <div className="footer-logo">
-            <span className="l-dim">K</span><span className="l-ai">AI</span><span className="l-ro">RO</span>
+            <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>
           </div>
           <span className="footer-right">© 2026 — Personal use</span>
         </footer>
