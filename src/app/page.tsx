@@ -55,7 +55,6 @@ const css = `
     align-items: center;
     justify-content: space-between;
     border-bottom: 0.5px solid var(--border);
-    position: relative;
   }
 
   .page-body { padding-top: 4.5rem; }
@@ -71,15 +70,11 @@ const css = `
   }
 
   .header-tagline {
-    font-size: 0.58rem;
+    font-size: 0.68rem;
     color: var(--text-tertiary);
-    letter-spacing: 0.12em;
-    text-transform: lowercase;
-    font-weight: 400;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-top: 0.4rem;
   }
 
   .products-section { padding: 3rem 0 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
@@ -193,10 +188,12 @@ export default function Home() {
       <div className="wrapper">
         <header>
           <div className="header-inner">
-            <div className="logo">
-              <img src="/kairo-wordmark-cropped.png" alt="Kairo" />
+            <div>
+              <div className="logo">
+                <img src="/kairo-wordmark-cropped.png" alt="Kairo" />
+              </div>
+              <div className="header-tagline">adaptive intelligence chief-of-staff</div>
             </div>
-            <span className="header-tagline">adaptive intelligence chief-of-staff</span>
             <span className="header-meta">meetkairo.ai</span>
           </div>
         </header>
