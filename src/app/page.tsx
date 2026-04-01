@@ -51,14 +51,14 @@ const css = `
   .header-inner {
     max-width: 900px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 0.5px solid var(--border);
   }
 
-  .page-body { padding-top: 5.5rem; }
+  .page-body { padding-top: 4.5rem; }
 
   .logo img { height: 32px; width: auto; display: block; }
 
@@ -194,7 +194,7 @@ export default function Home() {
               <div className="logo">
                 <img src="/kairo-wordmark-cropped.png" alt="Kairo" />
               </div>
-              <div className="header-tagline">adaptive intelligence<br />chief-of-staff</div>
+              <div className="header-tagline">adaptive intelligence chief-of-staff</div>
             </div>
             <span className="header-meta">meetkairo.ai</span>
           </div>
