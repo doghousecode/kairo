@@ -55,8 +55,8 @@ export default function RootLayout({
         {/* All styles inline — no dependency on CSS load order */}
         <div id="kairo-splash" style={{
           position: 'fixed', inset: 0, zIndex: 9999,
-          background: '#0d0d0d', display: 'flex',
-          alignItems: 'center', justifyContent: 'center',
+          background: '#0d0d0d', display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center', gap: '1.5rem',
           pointerEvents: 'none',
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -65,6 +65,16 @@ export default function RootLayout({
             alt="Kairo"
             style={{ width: '68vw', maxWidth: '680px', height: 'auto' }}
           />
+          <p style={{
+            color: 'rgba(240,240,240,0.35)',
+            fontSize: 'clamp(0.65rem, 2vw, 0.85rem)',
+            letterSpacing: '0.18em',
+            textTransform: 'lowercase',
+            fontWeight: 400,
+            margin: 0,
+          }}>
+            adaptive intelligence chief-of-staff
+          </p>
         </div>
 
         <div id="kairo-root" style={{ opacity: 0 }}>
