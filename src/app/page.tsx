@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import FooterLogo from "./components/FooterLogo";
 
 export const metadata: Metadata = {
   title: "Kairo — Your AI Chief of Staff",
@@ -277,9 +278,7 @@ export default function Home() {
         </section>
 
         <footer>
-          <div className="footer-logo">
-            <span className="wordmark"><span className="l-dim">k</span><span className="l-ai">ai</span><span className="l-ro">ro</span></span>
-          </div>
+          <FooterLogo />
           <span className="footer-right">© 2026 — Personal use</span>
         </footer>
         </div>

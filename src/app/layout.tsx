@@ -86,13 +86,35 @@ export default function RootLayout({
             if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
             var splash = document.getElementById('kairo-splash');
             var root   = document.getElementById('kairo-root');
+            var manual = false;
+
+            function hideSplash() {
+              splash.style.transition    = 'opacity 0.8s ease';
+              splash.style.opacity       = '0';
+              splash.style.pointerEvents = 'none';
+              splash.style.cursor        = 'default';
+            }
+
+            // Click wordmark in splash to dismiss (manual mode only)
+            splash.addEventListener('click', function() {
+              if (manual) { manual = false; hideSplash(); }
+            });
+
+            // Exposed for footer button
+            window.kairoShowSplash = function() {
+              manual = true;
+              splash.style.transition    = 'none';
+              splash.style.opacity       = '1';
+              splash.style.pointerEvents = 'auto';
+              splash.style.cursor        = 'pointer';
+            };
+
+            // Auto-hide after initial delay
             setTimeout(function() {
               document.documentElement.style.overflow = '';
-              root.style.transition   = 'opacity 0.6s ease';
-              root.style.opacity      = '1';
-              splash.style.transition = 'opacity 0.8s ease';
-              splash.style.opacity    = '0';
-              setTimeout(function() { splash.remove(); }, 800);
+              root.style.transition = 'opacity 0.6s ease';
+              root.style.opacity    = '1';
+              hideSplash();
             }, 3000);
           })();
         `}} />
